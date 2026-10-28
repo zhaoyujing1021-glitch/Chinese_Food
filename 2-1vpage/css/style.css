@@ -1,0 +1,160 @@
+@charset "UTF-8";
+
+/* 共通部分 common parts
+-------------------- */
+html {
+    font-size: 100%;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.7;
+    color: #432;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+/* HEADER 
+-----------------------*/
+
+.page-header {
+    justify-content: space-between;
+    align-items: center;
+    background-color: #D9531E;
+    /* 背景色 */
+    width: 100%;
+
+}
+
+.page-header .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+}
+
+.wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
+.big-bg {
+    background-color: #D9531E;
+    /*ここ自分の色*/
+    height: 100px;
+    margin-bottom: 4px;
+}
+
+.main-nav {
+    display: flex;
+    list-style: none;
+    font-size: 1.25rem;
+    margin-top: 0;
+    text-transform: uppercase;
+}
+
+.main-nav li {
+    margin-left: 30px;
+    white-space: nowrap;
+}
+
+.main-nav a {
+    color: #432;
+}
+
+.main-nav a:hover {
+    color: #0bd;
+}
+
+/*xx料理*/
+.title {
+    margin-top: 50px;
+    color: #D9531E;
+    /*ここ自分の色*/
+}
+
+/*記事部分*/
+article {
+    width: 74%;
+}
+
+h1 {
+    border-bottom: 2px solid #D9531E;
+    padding-bottom: 10px;
+}
+
+h2 {
+    margin-top: 3em;
+    border-bottom: 2px solid #D9531E;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+p {
+    text-indent: 1em;
+}
+
+
+
+/*フッター
+--------------------*/
+footer {
+    background: #432;
+    text-align: center;
+    padding: 26px 0;
+}
+
+footer p {
+    color: #fff;
+    font-size: 0.875rem;
+}
+
+
+
+
+
+.news-contents {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+
+img {
+    max-width: 35%;
+    display: block;
+    margin-left: 100px;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/*copy*/
+
+/*注釈*/
+#annotation-content {
+    padding-left: 1rem;
+    line-height: 1.6;
+}
+
+/* 新疆ウイグル料理の代表的な料理・画像まわりの調整 */
+
+article p img {
+    margin-left: 50px; 
+    margin-top: 1px;
+    margin-bottom: 50px;
+}
+article p {
+    margin-bottom: 5px; /* 缩短文字段落与下方图片的距离 */
+}
