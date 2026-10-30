@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注釈 - 四川料理</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: #FAF6F0 !important; font-family: sans-serif; line-height: 1.7; margin: 0; padding: 20px;">
+<div class="annotation-box" style="max-width: 650px; margin: 30px auto; padding: 25px; border: 1px solid #ccc; border-radius: 8px; background: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; gap: 10px; flex-wrap: wrap;">
+    <h2 id="annotation-title" style="margin: 0; color: #D9531E; font-size: 1.4rem;">読み込み中...</h2>
+    <div class="lang-nav" style="display: flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: bold; color: #432;">
+      <span class="lang-label" style="color: #D9531E;">言語：</span>
+      <div class="lang-switch" style="display: inline-flex; align-items: center; background: rgba(0,0,0,0.18); border: 1px solid rgba(0,0,0,0.2); border-radius: 20px; padding: 2px 4px; gap: 2px;">
+        <a href="#" class="active" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; background: #fff; color: #D9531E;">日本語</a>
+        <a href="../../zh/2-3shipage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">中文</a>
+        <a href="../../en/2-3shipage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">EN</a>
+        <a href="../../ru/2-3shipage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">RU</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="annotation-content" style="line-height: 1.8; margin: 18px 0; color: #333; font-size: 1.02rem;"></div>
+
+  <button onclick="window.close();"
+    style="background: none; border: none; color: #D9531E; text-decoration: underline; cursor: pointer; padding: 0; font-size: 1rem; font-weight: bold;">
+    閉じる
+  </button>
+</div>
+
+<script>
+  // 1. URLから id を取得
+  const urlParams = new URLSearchParams(window.location.search);
+  const rawId = urlParams.get('id');
+  let wordId = rawId ? decodeURIComponent(rawId).trim() : '';
+
+  // 2. 日文页面可能传过来的词条别名映射表（转为统一中文 Key）
+  const keyMapping = {
+    "狼牙（ろうげ）ポテト": "狼牙土豆",
+    "狼牙ポテト": "狼牙土豆",
+    "四川料理": "四川料理",
+    "麻婆豆腐": "麻婆豆腐",
+    "麻辣香鍋": "麻辣香锅",
+    "火鍋": "火锅",
+    "棒棒鶏": "棒棒鸡",
+    "凉糕": "凉糕",
+    "冰糖銀耳": "冰糖银耳",
+    "串串香": "串串香",
+    "鉢鉢鶏": "钵钵鸡",
+    "葉児粑": "叶儿粑"
+  };
+
+  if (keyMapping[wordId]) {
+    wordId = keyMapping[wordId];
+  } else {
+    const unquoted = wordId.replace(/[「」]/g, '').trim();
+    if (keyMapping[unquoted]) wordId = keyMapping[unquoted];
+  }
+
+  // 3. 字典数据（Key 与中文/俄文完全一致）
+  const dict = {
+    "四川料理": {
+      "title": "四川料理（しせんりょうり）",
+      "content": "中国四大料理の一つ。唐辛子の辛さ（辣）と花椒の痺れ（麻）が組み合わさった「麻辣（マーラー）」風味が特徴です。<br><br>"
+    },
+    "麻婆豆腐": {
+      "title": "麻婆豆腐（マーボードウフ）",
+      "content": "ひき肉と赤唐辛子・花椒・豆板醤などを炒め、豆腐をスープで煮込んでとろみをつけた四川料理を代表する一品です。<br><br>"
+    },
+    "麻辣香锅": {
+      "title": "麻辣香鍋（マーラーシャングオ）",
+      "content": "肉や野菜、海鮮などの食材を特製の炒め味噌と花椒・唐辛子で汁気なく炒め上げたスパイシーな四川風干し鍋料理です。<br><br>"
+    },
+    "火锅": {
+      "title": "四川火鍋（ひなべ）",
+      "content": "牛脂ベースの濃厚な麻辣スープに唐辛子や花椒をたっぷり効かせ、お肉や野菜を涮（しゃぶしゃぶ）して食べる伝統鍋料理です。<br><br>"
+    },
+    "棒棒鸡": {
+      "title": "棒棒鶏（バンバンジー）",
+      "content": "蒸し蒸した鶏肉を棒で叩いて柔らかくほぐし、胡麻ダレやラー油、花椒を効かせた怪味ソースをかけて食べる冷菜です。<br><br>"
+    },
+    "凉糕": {
+      "title": "涼糕（リャンガオ）",
+      "content": "うるち米で作る伝統的な夏のごちそうスイーツ。プルンとしたゼリー状の餅に黒糖シロップをかけて冷やして食べます。<br><br>"
+    },
+    "冰糖银耳": {
+      "title": "冰糖銀耳（ビンタンインアル）",
+      "content": "白キクラゲを氷砂糖やクコの実と一緒にじっくり煮込んだ、肌や体に優しい伝統的な薬膳デザートスープです。<br><br>"
+    },
+    "串串香": {
+      "title": "串串香（チュアンチュアンシャン）",
+      "content": "串に刺した好みの具材を沸騰した麻辣スープで煮込んで食べる、手軽で人気のある四川スタイルの串火鍋です。<br><br>"
+    },
+    "钵钵鸡": {
+      "title": "鉢鉢鶏（ボーボージー）",
+      "content": "茹でて串に刺した具材を、ラー油や清々しい藤椒（タンジョウ）の効いた冷たい特製スープに浸して食べる冷製串料理です。<br><br>"
+    },
+    "叶儿粑": {
+      "title": "葉児粑（イェールバー）",
+      "content": "もち米の粉で肉餡や小豆餡を包み、良姜（笹の叶に似た植物）の叶で包んで蒸し上げた香ばしい四川のお餅です。<br><br>"
+    },
+    "狼牙土豆": {
+      "title": "狼牙ポテト（ろうげポテト）",
+      "content": "ギザギザの波型にカットしたジャガイモを素揚げし、ラー油、花椒、香菜などで和えた四川の街角で大人気のおやつです。<br><br>"
+    }
+  };
+
+  // 4. 渲染到页面
+  if (wordId && dict[wordId]) {
+    document.getElementById('annotation-title').textContent = dict[wordId].title;
+    document.getElementById('annotation-content').innerHTML = dict[wordId].content;
+  } else if (wordId) {
+    document.getElementById('annotation-title').textContent = wordId;
+    document.getElementById('annotation-content').textContent = "このキーワードの注釈は見つかりませんでした。";
+  } else {
+    document.getElementById('annotation-title').textContent = "エラー";
+    document.getElementById('annotation-content').textContent = "このキーワードの注釈は見つかりませんでした。";
+  }
+
+  // 5. 切换语言时保留 ?id=统一中文Key
+  if (wordId) {
+    document.querySelectorAll('.lang-switch a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href !== '#') {
+        a.setAttribute('href', href + '?id=' + encodeURIComponent(wordId));
+      }
+    });
+  }
+</script>
+</body>
+</html>

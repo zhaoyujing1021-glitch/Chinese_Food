@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注釈 - ウイグル料理</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: #FAF6F0 !important; font-family: sans-serif; line-height: 1.7; margin: 0; padding: 20px;">
+<div class="annotation-box" style="max-width: 650px; margin: 30px auto; padding: 25px; border: 1px solid #ccc; border-radius: 8px; background: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; gap: 10px; flex-wrap: wrap;">
+    <h2 id="annotation-title" style="margin: 0; color: #D9531E; font-size: 1.4rem;">読み込み中...</h2>
+    <div class="lang-nav" style="display: flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: bold; color: #432;">
+      <span class="lang-label" style="color: #D9531E;">言語：</span>
+      <div class="lang-switch" style="display: inline-flex; align-items: center; background: rgba(0,0,0,0.18); border: 1px solid rgba(0,0,0,0.2); border-radius: 20px; padding: 2px 4px; gap: 2px;">
+        <a href="#" class="active" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; background: #fff; color: #D9531E;">日本語</a>
+        <a href="../../zh/2-1vpage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">中文</a>
+        <a href="../../en/2-1vpage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">EN</a>
+        <a href="../../ru/2-1vpage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">RU</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="annotation-content" style="line-height: 1.8; margin: 18px 0; color: #333; font-size: 1.02rem;"></div>
+
+  <button onclick="window.close();"
+    style="background: none; border: none; color: #D9531E; text-decoration: underline; cursor: pointer; padding: 0; font-size: 1rem; font-weight: bold;">
+    閉じる
+  </button>
+</div>
+
+<script>
+  // 1. URLからキーワード（id）を取り出す
+  const urlParams = new URLSearchParams(window.location.search);
+  const rawId = urlParams.get('id');
+  let wordId = rawId ? decodeURIComponent(rawId).trim() : '';
+
+  // 2. 补全映射：将日文页面的词条正确转换为统一的中文 Key
+  const keyMapping = {
+    "餅": "饼",
+    "ナン": "饼",
+    "馕": "馕",
+    "烤包子": "烤包子",
+    "羊肉串": "羊肉串",
+    "13種類ものパン": "13种面饼",       // ⭐ 在这里补上这一行！
+    "「中華の調理法」": "中式烹饪技法",
+    "中華の調理法": "中式烹饪技法"
+  };
+
+  if (keyMapping[wordId]) {
+    wordId = keyMapping[wordId];
+  } else {
+    const unquoted = wordId.replace(/[「」]/g, '').trim();
+    if (keyMapping[unquoted]) wordId = keyMapping[unquoted];
+  }
+
+  // 3. 字典数据
+  const dictionary = {
+    "饼": {
+      "title": "餅（ナン / 餅）",
+      "content": "中国語で日本語のモチモチした「お餅」ではなく、<br>「平焼きパン」と解釈するのが正確です。"
+    },
+    "馕": {
+      "title": "烤馕（ウイグルナン）",
+      "content": "タンドール（ナン坑）の壁面に貼りつけて焼き上げる、ウイグルの香ばしい伝統的な主食パンです。"
+    },
+    "烤包子": {
+      "title": "烤包子（サムサ）",
+      "content": "羊肉と玉ねぎの具を生地で包み、タンドール窯の壁に貼り付けてカリッと焼き上げたウイグルの名物料理です。"
+    },
+    "羊肉串": {
+      "title": "羊肉串（カワプ）",
+      "content": "ラム肉にクミンや唐辛子などのスパイスをまぶして炭火で焼いた、ウイグル料理を代表する串焼きです。"
+    },
+    "13种面饼": {
+      "title": "13種類ものパン",
+      "content": "11世紀の辞書『トルコ語大辞典』にはすでに多くのナンの種類が記されていました。<br>"
+    },
+    "中式烹饪技法": {
+      "title": "「中華の調理法」",
+      "content": "ウイグル語で「サイ」と呼ばれる炒め物料理のこと。もともと「菜（ツァイ）」という中国語が由来で、強火で一気に炒める技法が加わったことで、ラグメン（拌面）の具材などが劇的に進化しました。<br>"
+    }
+  };
+
+  // 4. 画面に表示する
+  let target = dictionary[wordId];
+  if (!target) {
+    const unquoted = wordId.replace(/[「」]/g, '').trim();
+    target = dictionary[unquoted];
+  }
+
+  if (target) {
+    document.getElementById('annotation-title').textContent = target.title;
+    document.getElementById('annotation-content').innerHTML = target.content;
+  } else if (wordId) {
+    document.getElementById('annotation-title').textContent = wordId;
+    document.getElementById('annotation-content').textContent = "このキーワードの注釈は見つかりませんでした。";
+  } else {
+    document.getElementById('annotation-title').textContent = "エラー";
+    document.getElementById('annotation-content').textContent = "このキーワードの注釈は見つかりませんでした。";
+  }
+
+  // 5. 语言切换时保持参数
+  if (wordId) {
+    document.querySelectorAll('.lang-switch a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href !== '#') {
+        a.setAttribute('href', href + '?id=' + encodeURIComponent(wordId));
+      }
+    });
+  }
+</script>
+</body>
+</html>

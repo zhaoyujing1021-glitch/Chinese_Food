@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Art of Cantonese Cuisine - Chinese Cuisine</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+    <div class="big-bg">
+        <header class="page-header">
+            <div class="wrapper">
+                <div class="header-left">
+                    <h1><a href="../index.html"><img class="logo" src="images/logo.png" alt="Logo"></a></h1>
+                    
+    <div class="lang-nav">
+      <span class="lang-label">Language: </span>
+      <div class="lang-switch">
+        <a href="../../ja/2-2kannpage/美食page.html" class="">日本語</a>
+        <a href="../../zh/2-2kannpage/美食page.html" class="">中文</a>
+        <a href="#" class="active">EN</a>
+        <a href="../../ru/2-2kannpage/美食page.html" class="">RU</a>
+      </div>
+    </div>
+                </div>
+                <nav>
+                    <ul class="main-nav">
+                        <li><a href="../0-top/TOP.html">Home</a></li>
+                        <li><a href="../2-1vpage/page.html">Xinjiang</a></li>
+                        <li><a href="美食page.html">Guangdong</a></li>
+                        <li><a href="../2-3shipage/sichuan.html">Sichuan</a></li>
+                        <li><a href="../2-4doupage/記事/東北料理.html">Dongbei</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="news-contents wrapper">
+            <article>
+                <h1 class="title">The Art of Cantonese Cuisine</h1>
+                <p>Cantonese cuisine (Yue cuisine) is celebrated worldwide through the saying 'Eat in Guangzhou'. Blessed by a warm subtropical climate, fertile deltas, and abundant coastline, Guangdong chefs masterfully elevate natural ingredients into pure culinary poetry.</p>
+
+                <h2>Classic Delicacies</h2>
+                <ul>
+                    <li>
+                        <span class="dish-name">Yum Cha & Dim Sum</span><br>
+                        <p>The cherished tradition of sipping hot fragrant tea while enjoying delicate bite-sized <span class="keyword">点心</span> (Dim Sum). Highlights include translucent har gow shrimp dumplings, savory barbecue pork buns, and sweet golden <span class="keyword">流沙包</span> (Salted Egg Lava Buns). The gentle custom of flipping teapot lids to signal a refill adds charming cultural warmth.</p>
+                        <img src="images/yincha.jpg" alt="Yum Cha & Dim Sum" style="width: 100%; max-width: 400px; display: block; margin: 15px 0; border-radius: 8px;">
+                    </li>
+                    <li>
+                        <span class="dish-name">Siu Mei (Cantonese Roast Meats)</span><br>
+                        <p>Specialty roasted delicacies hanging enticingly behind glass vitrines: honey-glazed char siu pork, crispy skin roast goose, and crackling pork belly. Expertly chopped to order, balancing crisp golden skin with melting tenderness.</p>
+                        <img src="images/90.png" alt="Siu Mei (Cantonese Roast Meats)" style="width: 100%; max-width: 400px; display: block; margin: 15px 0; border-radius: 8px;">
+                    </li>
+                    <li>
+                        <span class="dish-name">Beef Chow Fun</span><br>
+                        <p>A timeless masterpiece of tender sliced beef rapidly stir-fried with smooth <span class="keyword">河粉</span> (Shahe rice noodles) over volcanic flame. Flawless execution requires no excess oil, whole unbroken noodles, and the unmistakable smoky essence of <span class="keyword">镬气</span> (Breath of the Wok).</p>
+                        <img src="images/ganchaoniuhe.jpg" alt="Beef Chow Fun" style="width: 100%; max-width: 400px; display: block; margin: 15px 0; border-radius: 8px;">
+                    </li>
+                </ul>
+
+                <h2>Flavor Philosophy: Light, Fresh, Tender & Silky</h2>
+                <p>Cantonese gastronomy adheres to four pillars: 'Qing' (pure and clean broth), 'Xian' (fresh and alive ingredients), 'Nen' (tender and juicy textures), and 'Hua' (silky smooth mouthfeel). Minimal grease and subtle seasoning honor the true essence of each ingredient.</p>
+
+                <h2>Slow-Simmered Soup Culture (Lao Huo Tang)</h2>
+                <img src="images/tang.jpg" alt="Soup" style="width: 100%; max-width: 400px; display: block; margin: 15px 0; border-radius: 8px;">
+                <p>In Guangdong, 'a day without soup is a day without comfort'. Chefs slowly simmer bone broths with jujubes, goji berries, and herbal ingredients over low heat for hours. Nutrients infuse deeply into the clear broth, warming body and spirit.</p>
+
+                <h2>Conclusion</h2>
+                <p>Cantonese cuisine continues to inspire global culinary traditions through its unwavering dedication to ingredient freshness and gentle, restorative cooking philosophies.</p>
+            </article>
+
+            
+<aside>
+  <h2>Categories</h2>
+  <ul>
+    <li><a href="../2-3shipage/compare.html">Comparison with Japanese Chinese Cuisine</a></li>
+    <li><a href="../2-3shipage/xiaochi.html">Popular Street Foods (Xiaochi)</a></li>
+    <li><a href="../2-3shipage/japan_origin.html">Chinese Dishes Born in Japan</a></li>
+    <li><a href="../2-3shipage/trivia.html">Chinese Culinary Trivia</a></li>
+  </ul>
+</aside>
+        </div>
+
+        <footer>
+            <div class="wrapper">
+                <p><small>&copy; 2026 Manabox</small></p>
+            </div>
+        </footer>
+    </div>
+
+    
+<script>
+  document.querySelectorAll('.keyword').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.style.textDecoration = 'underline';
+    el.style.color = '#D9531E';
+    el.addEventListener('click', () => {
+      const wordText = el.textContent.trim();
+      window.open(`annotation.html?id=${encodeURIComponent(wordText)}`, '_blank');
+    });
+  });
+</script>
+</body>
+</html>

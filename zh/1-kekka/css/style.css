@@ -1,0 +1,251 @@
+<style>body {
+    background-color: #F5E6C4;
+    text-align: center;
+    font-family: Arial;
+}
+
+.header {
+    background-color: #A61C18;
+    color: white;
+    padding: 20px;
+}
+
+.map {
+    margin-top: 40px;
+}
+
+/* ✅ ✅ 加在这里 */
+.map img {
+    display: block;
+    margin: 40px auto;
+    width: 800px;
+    height: auto;
+}
+
+</style>
+
+aside ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+aside ul li {
+    margin-bottom: 12px;
+}
+
+aside ul li a {
+    display: block;
+    padding: 12px 16px;
+    background-color: #ffffff;      
+    color: #333333;                 
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95rem;
+    
+    border-radius: 8px;             
+    border: 1px solid #e0e0e0;      
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08); 
+    
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+aside ul li a:hover {
+    background-color: #fff9f5;     
+    color: #D9531E;                 
+    border-color: #D9531E;         
+    
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(217, 83, 30, 0.15);
+}
+
+
+/* =========================================================
+   Header Background Depth Rule & Anti-Displacement Layout
+   Depth: Page Background < Header Background < .title Color
+   ========================================================= */
+:root {
+  --header-bg: #BD3834;
+  --header-border: #A82D29;
+  --header-text: #ffffff;
+  --title-color: #A61C18;
+}
+
+.page-header {
+  background-color: var(--header-bg) !important;
+  border-bottom: 1px solid var(--header-border) !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08) !important;
+  width: 100% !important;
+}
+
+.big-bg {
+  background-color: var(--header-bg) !important;
+  height: auto !important;
+  min-height: 75px;
+  margin-bottom: 25px;
+}
+
+.page-header .wrapper,
+.page-header.wrapper {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 12px 20px !important;
+  min-height: 70px;
+}
+
+.header-left {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  flex-wrap: wrap !important;
+  flex-shrink: 0 !important;
+}
+
+.header-left h1 {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+.header-left .logo {
+  display: block !important;
+  width: 85px !important;
+  height: auto !important;
+  margin: 0 !important;
+}
+
+.lang-nav {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 0.88rem !important;
+  color: var(--header-text) !important;
+  font-weight: bold !important;
+  white-space: nowrap !important;
+}
+
+.lang-label {
+  color: var(--header-text) !important;
+  font-weight: bold !important;
+}
+
+.lang-switch {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: rgba(0, 0, 0, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  border-radius: 20px !important;
+  padding: 2px 4px !important;
+  gap: 2px !important;
+}
+
+.lang-switch a {
+  display: inline-block !important;
+  padding: 2px 7px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  color: var(--header-text) !important;
+  text-decoration: none !important;
+  border-radius: 12px !important;
+  line-height: 1.2 !important;
+  transition: all 0.2s ease !important;
+}
+
+.lang-switch a:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.lang-switch a.active {
+  background: #ffffff !important;
+  color: var(--title-color) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+}
+
+.main-nav {
+  display: flex !important;
+  align-items: center !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 18px !important;
+  flex-wrap: wrap !important;
+}
+
+.main-nav li {
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+.main-nav a {
+  display: inline-block !important;
+  font-size: 1.05rem !important;
+  color: var(--header-text) !important;
+  font-weight: 600 !important;
+  opacity: 0.95;
+}
+
+.main-nav a:hover {
+  opacity: 0.75;
+}
+
+/* 俄语版排版防挤压与自适应 */
+html[lang="ru"] .main-nav {
+  gap: 10px !important;
+}
+
+html[lang="ru"] .main-nav a {
+  font-size: 0.9rem !important;
+}
+
+html[lang="ru"] .lang-switch a {
+  font-size: 0.78rem !important;
+  padding: 2px 5px !important;
+}
+
+/* 侧边栏文字换行支持 */
+aside ul li a {
+  word-break: break-word !important;
+  line-height: 1.4 !important;
+}
+
+/* 结果页（1-kekka）通用顶栏 */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+  padding: 10px 4%;
+  color: var(--header-text);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.top-nav .header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.top-nav .logo {
+  height: 40px;
+  width: auto;
+}
+
+.top-nav .home-btn {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+}
+
+.top-nav .home-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The World of Xinjiang Uyghur Cuisine - Chinese Cuisine</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="images/logo.png">
+</head>
+<body>
+  <div class="big-bg">
+    <header class="page-header">
+      <div class="wrapper">
+        <div class="header-left">
+          <h1><a href="../index.html"><img class="logo" src="images/logo.png" alt="Logo"></a></h1>
+          
+    <div class="lang-nav">
+      <span class="lang-label">Language: </span>
+      <div class="lang-switch">
+        <a href="../../ja/2-1vpage/page.html" class="">日本語</a>
+        <a href="../../zh/2-1vpage/page.html" class="">中文</a>
+        <a href="#" class="active">EN</a>
+        <a href="../../ru/2-1vpage/page.html" class="">RU</a>
+      </div>
+    </div>
+        </div>
+        <nav>
+          <ul class="main-nav">
+            <li><a href="../0-top/TOP.html">Home</a></li>
+            <li><a href="page.html">Xinjiang</a></li>
+            <li><a href="../2-2kannpage/美食page.html">Guangdong</a></li>
+            <li><a href="../2-3shipage/sichuan.html">Sichuan</a></li>
+            <li><a href="../2-4doupage/記事/東北料理.html">Dongbei</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="news-contents wrapper">
+      <article>
+        <h1 class="title">The World of Xinjiang Uyghur Cuisine</h1>
+        <p>Xinjiang cuisine is nurtured by the ancient history of the Silk Road and vast natural landscapes, possessing a truly unique food culture. Expansive oases and rich pastoral resources give rise to aromatic roasted lamb, bold spices, hand-pulled noodles, and hearty tandoor breads that capture the romantic essence of Central Asia.</p>
+
+        <h2>Signature Dishes</h2>
+        
+        <p><strong>Lamb Skewers</strong><br>(Kawap - Charcoal-Grilled Lamb Skewers)<br>Succulent lamb chunks generously seasoned with cumin and chili flakes, then grilled over hot charcoal. It is the iconic street food of Xinjiang with an irresistible aroma.</p>
+        <img class="img" src="images/ramuniku.jpg" alt="Lamb Skewers">
+
+        <p><strong>Naan & Baked Samsa</strong><br>(Naan Bread / Samsa)<br>Crusty round flatbreads slapped onto the inner clay walls of a blazing tandoor, alongside crispy samsa pastries stuffed with juicy diced lamb and onions. Both are beloved daily staples.</p>
+        <img class="img" src="images/samusa.jpg" alt="Naan & Baked Samsa">
+
+        <p><strong>Laghman (Pulled Noodles), Milk Tea & Yogurt Zongzi</strong><br>Chewy hand-pulled noodles topped with a rich lamb, tomato, and bell pepper stir-fry (Laghman), savory salted milk tea, and delicate sweet rice dumplings drenched in thick artisan yogurt and honey syrup.</p>
+
+        <h2>History of Xinjiang Cuisine</h2>
+        <h3>1. [Steppe Era] Sheep & Milk</h3>
+        <p>Region: Mongolian Plateau and northern steppes</p>
+        <p>Lifestyle: Nomadic life following water and pastures.</p>
+        <img class="img" src="images/yubokumin.png" alt="Nomad">
+        <p>Diet: Fresh mutton, fermented mare's milk, and natural dairy.</p>
+        <img class="img" src="images/hitsuji.png" alt="Sheep">
+        <p>Key note: A pure pastoral nomadic food tradition.</p>
+
+        <h3>2. [Oasis Era] Wheat & Bread</h3>
+        <p>Region: Migration into Xinjiang oases along the Silk Road</p>
+        <p>Lifestyle: Settled oasis agriculture and town building.</p>
+        <p>Diet: Cultivated wheat introduced from West Asia, baking flatbreads and stretching noodles.</p>
+        <p>Key note: Over 1,000 years ago, historical texts already recorded <span class="keyword">13 kinds of flatbreads</span>.</p>
+
+        <h3>3. [Fusion Era] Convergence of East & West</h3>
+        <p>Region: Crossroads of trade (Tarim Basin)</p>
+        <p>Lifestyle: Upholding halal traditions while absorbing diverse cultures.</p>
+        <p>Diet: Integrated Chinese wok-frying techniques, regional spices, and later Russian baking influences.</p>
+
+        <h3>The Modern Legacy</h3>
+        <p>The fusion of 'pastoral fresh meats' + 'oasis wheat flour' + <span class="keyword">Chinese cooking methods</span> created the vibrant, multi-layered Xinjiang cuisine we celebrate today.</p>
+      </article>
+
+      
+<aside>
+  <h2>Categories</h2>
+  <ul>
+    <li><a href="../2-3shipage/compare.html">Comparison with Japanese Chinese Cuisine</a></li>
+    <li><a href="../2-3shipage/xiaochi.html">Popular Street Foods (Xiaochi)</a></li>
+    <li><a href="../2-3shipage/japan_origin.html">Chinese Dishes Born in Japan</a></li>
+    <li><a href="../2-3shipage/trivia.html">Chinese Culinary Trivia</a></li>
+  </ul>
+</aside>
+    </div>
+
+    <footer>
+      <div class="wrapper">
+        <p><small>&copy; 2026 Manabox</small></p>
+      </div>
+    </footer>
+  </div>
+
+  
+<script>
+  document.querySelectorAll('.keyword').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.style.textDecoration = 'underline';
+    el.style.color = '#D9531E';
+    el.addEventListener('click', () => {
+      const wordText = el.textContent.trim();
+      window.open(`annotation.html?id=${encodeURIComponent(wordText)}`, '_blank');
+    });
+  });
+</script>
+</body>
+</html>

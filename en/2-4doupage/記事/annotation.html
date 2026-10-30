@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Annotation</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: #FAF6F0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<div class="annotation-box" style="max-width: 600px; margin: 40px auto; padding: 25px; border: 1px solid #E8DFD5; border-radius: 8px; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #F0EAE1; padding-bottom: 12px; gap: 10px; flex-wrap: wrap;">
+    <h2 id="annotation-title" style="margin: 0; color:#D9531E; font-size: 1.35rem;">Loading...</h2>
+    
+    <div class="lang-nav">
+      <span class="lang-label">Language: </span>
+      <div class="lang-switch">
+        <a href="../../../ja/2-4doupage/記事/annotation.html" class="">日本語</a>
+        <a href="../../../zh/2-4doupage/記事/annotation.html" class="">中文</a>
+        <a href="#" class="active">EN</a>
+        <a href="../../../ru/2-4doupage/記事/annotation.html" class="">RU</a>
+      </div>
+    </div>
+  </div>
+  <div id="annotation-content" style="line-height: 1.8; margin: 18px 0; color: #443322; font-size: 1.02rem;"></div>
+  <button onclick="window.close();"
+    style="background: #D9531E; border: none; color: white; padding: 8px 24px; border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: bold; transition: background 0.2s;">
+    Close
+  </button>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const wordId = urlParams.get('id');
+  const dict = {"饼":{"title":"Flatbread (Naan / Bing)","content":"Refers to traditional flatbread baked in a pan or tandoor oven, a central staple in northwestern and Central Asian cuisine."},"馕":{"title":"Naan (Uyghur Flatbread)","content":"A traditional round flatbread baked on the walls of a tandoor oven. Fragrant, crusty, and long-lasting."},"烤包子":{"title":"Baked Samsa","content":"Crispy pastries stuffed with juicy diced lamb and onions, baked to a golden brown inside a clay tandoor oven."},"羊肉串":{"title":"Lamb Skewers (Kawap)","content":"Tender lamb chunks skewered and grilled over charcoal, seasoned generously with aromatic cumin, chili, and salt."},"东北":{"title":"Dongbei (Northeast China)","content":"The traditional cuisine of Liaoning, Jilin, and Heilongjiang provinces, renowned for generous portions and savory stews."},"酸菜":{"title":"Pickled Cabbage (Suancai)","content":"Naturally fermented Chinese cabbage stored for winter, providing a sour savoriness essential for stews and pork hotpots."},"锅包肉":{"title":"Guobaorou (Crispy Sweet & Sour Pork)","content":"Crispy deep-fried sliced pork tenderloin coated in a delicate sweet-and-sour glaze, created in Harbin in the late Qing Dynasty."},"东北乱炖":{"title":"Dongbei Luandun (Harvest Stew)","content":"A comforting stew combining pork ribs, potatoes, eggplant, green beans, sweet corn, and glass noodles in a rich soybean sauce broth."},"地三鲜":{"title":"Di San Xian (Three Earth Delicacies)","content":"Stir-fried potato, eggplant, and sweet green peppers in a glossy garlic-soy glaze. Soft, rich, and deeply satisfying."},"东北大拉皮":{"title":"Dongbei Da La Pi (Sheet Jelly Noodles)","content":"Wide and translucent potato starch noodles served cold with cucumber strips, garlic, and a savory sesame dressing."},"糖葫芦":{"title":"Tanghulu (Candied Hawthorn Skewers)","content":"Chinese hawthorn berries coated in a crispy, glossy layer of melted rock sugar, creating a tart and sweet street dessert."},"拔丝":{"title":"Basi (Candied Pull-String Dessert)","content":"Fried sweet potatoes or apples tossed in hot caramelized sugar syrup that stretches into shiny sugar threads."},"溥仪":{"title":"Puyi (The Last Emperor)","content":"The twelfth and final emperor of the Qing Dynasty. Imperial chefs brought refined cooking methods to northeastern cities."},"满州族":{"title":"Manchu People","content":"The indigenous ethnic group of Northeast China whose hunting, simmering, and meat preservation traditions shaped northern cuisine."},"满族":{"title":"Manchu People","content":"The indigenous ethnic group of Northeast China whose hunting, simmering, and meat preservation traditions shaped northern cuisine."},"香菜":{"title":"Coriander / Cilantro","content":"A fresh herb widely used as a garnish in northern and southwestern Chinese dishes for its refreshing herbal aroma."},"13种面饼":{"title":"13 Varieties of Flatbread","content":"Documented in the 11th-century Compendium of Turkic Dialects, proving the ancient diversity of Silk Road baking culture."},"中式烹饪技法":{"title":"Chinese Wok Cooking","content":"Known as 'Sai' in Uyghur (derived from Chinese 'Cai'). High-heat wok stir-frying enriched noodle toppings with depth."},"四川料理":{"title":"Sichuan Cuisine","content":"One of the Four Great Chinese Cuisines, famous for complex flavor profiles, fiery chili heat, and numbing Sichuan peppercorn."},"麻婆豆腐":{"title":"Mapo Tofu","content":"Classic dish of tender tofu simmered with minced beef, Sichuan peppercorns, fermented bean paste, and vibrant chili oil."},"麻辣香锅":{"title":"Mala Xiangguo (Spicy Dry Pot)","content":"Prawns, meats, and fresh vegetables stir-fried over high heat with fragrant spices and peppercorn oil, intensely aromatic."},"火锅":{"title":"Sichuan Hotpot","content":"A simmering broth of beef tallow, dried chilies, and peppercorns where diners cook fresh meats and vegetables tableside."},"棒棒鸡":{"title":"Bang Bang Chicken","content":"Tender shredded poached chicken dressed with a rich, nutty sesame sauce, roasted chili oil, and crushed peanuts."},"凉糕":{"title":"Liang Gao (Chilled Rice Cake)","content":"A refreshing summer dessert made of steamed rice jelly drenched in thick, cooling brown sugar syrup."},"冰糖银耳":{"title":"Rock Sugar Tremella Soup","content":"A soothing dessert soup of simmered white wood ear mushrooms, rock sugar, and goji berries, prized for skin wellness."},"串串香":{"title":"Chuan Chuan Xiang (Skewered Hotpot)","content":"Ingredients skewered on bamboo sticks and simmered in aromatic spicy broth, eaten leisurely from communal pots."},"钵钵鸡":{"title":"Bobo Chicken","content":"Cold skewers infused in a seasoned broth of chili oil, sesame, and Sichuan green peppercorns, bright and zesty."},"叶儿粑":{"title":"Ye'erba (Leaf-Wrapped Rice Cake)","content":"Glutinous rice dough filled with savory pork or sweet paste, steamed in fragrant leaves."},"狼牙土豆":{"title":"Wolf Tooth Potatoes","content":"Crinkle-cut fried potatoes tossed with chili oil, Sichuan pepper powder, and fresh herbs, crispy outside and fluffy inside."},"点心":{"title":"Dim Sum","content":"Bite-sized delicacies served in bamboo steamers, enjoyed during Cantonese Yum Cha morning tea."},"流沙包":{"title":"Salted Egg Lava Bun","content":"A fluffy steamed bun filled with rich, molten golden custard made from salted duck egg yolk and cream."},"河粉":{"title":"Shahe Rice Noodles","content":"Wide and flat rice noodles originating from Shahe town in Guangzhou, essential for classic beef chow fun."},"镬气":{"title":"Wok Hei (Breath of the Wok)","content":"The unmistakable smoky aroma and charred complexity achieved by cooking over ferocious flame in a seasoned wok."}};
+
+  if (wordId && dict[wordId]) {
+    document.getElementById('annotation-title').textContent = dict[wordId].title;
+    document.getElementById('annotation-content').innerHTML = dict[wordId].content;
+  } else if (wordId) {
+    document.getElementById('annotation-title').textContent = wordId;
+    document.getElementById('annotation-content').textContent = "Annotation not found for this term.";
+  } else {
+    document.getElementById('annotation-title').textContent = "Annotation not found for this term.";
+  }
+
+  if (wordId) {
+    document.querySelectorAll('.lang-switch a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href !== '#') {
+        a.setAttribute('href', href + '?id=' + encodeURIComponent(wordId));
+      }
+    });
+  }
+</script>
+</body>
+</html>

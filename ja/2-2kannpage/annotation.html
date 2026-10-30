@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>注釈 - 広東料理</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background-color: #FAF6F0 !important; font-family: sans-serif; line-height: 1.7; margin: 0; padding: 20px;">
+<div class="annotation-box" style="max-width: 650px; margin: 30px auto; padding: 25px; border: 1px solid #ccc; border-radius: 8px; background: #ffffff; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 12px; gap: 10px; flex-wrap: wrap;">
+    <h2 id="annotation-title" style="margin: 0; color: #D9531E; font-size: 1.4rem;">読み込み中...</h2>
+    <div class="lang-nav" style="display: flex; align-items: center; gap: 6px; font-size: 0.88rem; font-weight: bold; color: #432;">
+      <span class="lang-label" style="color: #D9531E;">言語：</span>
+      <div class="lang-switch" style="display: inline-flex; align-items: center; background: rgba(0,0,0,0.18); border: 1px solid rgba(0,0,0,0.2); border-radius: 20px; padding: 2px 4px; gap: 2px;">
+        <a href="#" class="active" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; background: #fff; color: #D9531E;">日本語</a>
+        <a href="../../zh/2-2kannpage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">中文</a>
+        <a href="../../en/2-2kannpage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">EN</a>
+        <a href="../../ru/2-2kannpage/annotation.html" style="display: inline-block; padding: 2px 7px; font-size: 0.8rem; font-weight: 600; text-decoration: none; border-radius: 12px; line-height: 1.2; color: #555;">RU</a>
+      </div>
+    </div>
+  </div>
+
+  <div id="annotation-content" style="line-height: 1.8; margin: 18px 0; color: #333; font-size: 1.02rem;"></div>
+
+  <button onclick="window.close();"
+    style="background: none; border: none; color: #D9531E; text-decoration: underline; cursor: pointer; padding: 0; font-size: 1rem; font-weight: bold;">
+    閉じる
+  </button>
+</div>
+
+<script>
+  // 1. URLからキーワード（id）を取り出す
+  const urlParams = new URLSearchParams(window.location.search);
+  const rawId = urlParams.get('id');
+  let wordId = rawId ? decodeURIComponent(rawId).trim() : '';
+
+  // 2. 日文页面可能传过来的词条别名映射表（转为统一中文 Key）
+  const keyMapping = {
+    "点心": "点心",
+    "流沙包": "流沙包",
+    "河粉": "河粉",
+    "镬气": "镬气",
+    "鍋気": "镬气"
+  };
+
+  if (keyMapping[wordId]) {
+    wordId = keyMapping[wordId];
+  } else {
+    const unquoted = wordId.replace(/[「」]/g, '').trim();
+    if (keyMapping[unquoted]) wordId = keyMapping[unquoted];
+  }
+
+  // 3. 字典数据（Key 与中文/俄文完全一致）
+  const dictionary = {
+    "饼": {
+      "title": "餅（ナン / 餅）",
+      "content": "中国語で日本語のモチモチした「お餅」ではなく、<br>「平焼きパン」と解釈するのが正確です。"
+    },
+    "羊肉串": {
+      "title": "羊肉串（カワプ）",
+      "content": "ラム肉にクミンや唐辛子などのスパイスをまぶして炭火で焼いた、ウイグル料理を代表する串焼きです。"
+    },
+    "东北": {
+      "title": "東北",
+      "content": "中国東北地方（黒竜江省、吉林省、遼寧省および内モンゴル東部を含む）の郷土料理であり、黒竜江料理、吉林料理、遼寧料理という三つの系統で構成されている。<br><br>"
+    },
+    "酸菜": {
+      "title": "酸菜",
+      "content": "中国東北部で白菜から作る冬季用の漬物である。<br>酸菜はそのまま食べることは少なく、鍋料理、煮込み料理等の具材や餃子の餡などに主に使われて食される。<br>骨付き豚肉、カキ、豚バラ肉（白肉）と豚の血液を腸に詰めたブラッドソーセージ（血腸）と一緒に煮込んで食べることが多い。"
+    },
+    "锅包肉": {
+      "title": "鍋包肉",
+      "content": "鍋包肉は豚ヒレ肉を主材料とする古典的な中国東北部の伝統料理であり、清末のハルビン地域に起源を持ち、現在では中国全土で知られる家庭料理となっている。<br>鍋包肉の完成品は「音、色、味」の特徴を備えている<br>外皮がカリッと中身はふわっとし、色合いは琥珀色または薄茶色。<br>先に酸味、その後甘みを感じる甘酸っぱさが最大の特徴。"
+    },
+    "东北乱炖": {
+      "title": "東北乱炖",
+      "content": " 排骨（豚の骨付きバラ肉）やジャガイモ、インゲン豆、ナス、トウモロコシ、白菜、春雨などを主な材料とし、醤油ベースのスープで煮込んだ「東北風ごった煮」のこと。<br>食材を混ぜて煮込むことで味の融合を実現、調理法が簡単、手軽さとご飯が進む味であることが特徴。<br>"
+    },
+    "地三鲜": {
+      "title": "地三鮮",
+      "content": "じゃがいも、なす、ピーマンの3つの野菜を素揚げし、甘辛い醤油だれで炒めた料理。<br>大地の恵みである3つの新鮮な野菜（三鮮）を使用し、ホクホク、トロトロ、シャキシャキの食感と濃厚な味わいが人気な料理。<br>"
+    },
+    "东北大拉皮": {
+      "title": "東北大拉皮",
+      "content": "中国東北地方発祥の、じゃがいも澱粉などを原料とした幅約20mmの非常に太く平たい春雨のこと。<br>きしめんのような板状で、つるつるした喉越しともちもちした強い弾力が特徴。鍋の具材や冷菜、炒め物として親しまれている。<br>"
+    },
+    "糖葫芦": {
+      "title": "糖葫芦",
+      "content": "りんご飴のように、竹串刺しにした果物に飴掛けしたもの。<br>華北地方ではオオサンザシ、一部地域では山楂が用いられる。<br>"
+    },
+    "拔丝": {
+      "title": "抜絲",
+      "content": "さつまいもやバナナなどの揚げた食材に、煮詰めた熱い砂糖（飴）を絡めた中国のデザート<br><br>"
+    },
+    "溥仪": {
+      "title": "溥儀",
+      "content": "愛新覚羅 溥儀<br>清の第12代で最後の皇帝<br>"
+    },
+    "满州族": {
+      "title": "満州族",
+      "content": "満洲民族。<br>中国東北部、ロシア沿海地方（旧満洲）などに発祥し、現在は中国各地に散在している民族である。満洲族（まんしゅうぞく、マンジュぞく）、満族（まんぞく、マンぞく）などとも呼ばれる。<br>"
+    },
+    "香菜": {
+      "title": "カッコウアザミ",
+      "content": "料理の文脈では「香菜（パクチー）」や、現地のハーブ類を指していることが多いです。<br>"
+    },
+    "13种面饼": {
+      "title": "13種類ものパン",
+      "content": "11世紀の辞書『トルコ語大辞典』にはすでに多くのナンの種類が記されていました。<br>"
+    },
+    "中式烹饪技法": {
+      "title": "「中華の調理法」",
+      "content": "ウイグル語で「サイ」と呼ばれる炒め物料理のこと。もともと「菜（ツァイ）」という中国語が由来で、強火で一気に炒める技法が加わったことで、ラグメン（拌面）の具材などが劇的に進化しました。<br>"
+    },
+    "四川料理": {
+      "title": "四川料理",
+      "content": "世界三大料理の一つ中華料理。その中で一番庶民に愛されているのが、四川料理。王朝は変れども食文化は変らず、中国4千年の歴史が生んだ刺激的な四川料理をご紹介します<br><br>"
+    },
+    "麻婆豆腐": {
+      "title": "麻婆豆腐",
+      "content": "麻婆豆腐は、中華料理の1つ。挽肉と赤唐辛子・花椒・豆板醤、豆豉などを炒め、豆腐をスープで煮てとろみをつけた料理<br><br>"
+    },
+    "麻辣香锅": {
+      "title": "麻辣香鍋",
+      "content": "麻辣香鍋（マーラーシャングオ）は、炒め物で作る中華料理です。麻辣の風味が強く、肉や野菜が使われ、塩辛くスパイシーな味わいがす特徴で。<br><br>"
+    },
+    "火锅": {
+      "title": "火鍋",
+      "content": "火鍋とは、中華風の味付け・料理法・具材を特徴とする鍋料理のこと。<br><br>"
+    },
+    "棒棒鸡": {
+      "title": "棒棒鶏",
+      "content": "棒棒鶏は、四川料理の冷菜である。蒸し鶏に四川ソース、怪味ソースをかけた料理である。類似料理のよだれ鶏とは切り方が異なる。尚、日本では味付けに芝麻醤などゴマ由来のソースを用いることが多い。嘉定棒棒鶏、楽山棒棒鶏とも呼ばれる。<br><br>"
+    },
+    "凉糕": {
+      "title": "凉糕",
+      "content": "凉糕（リャンガオ）は、主に中国の四川省などで夏に食べられる、冷たくて甘い伝統的なスイーツです。うるち米の粉を練ってゼリー状に固めたもので、つるんとした喉越しと、もちっとした食感が特徴です。<br>涼糕というのは原料は玄米、ゼリーのような食感がおいしい 夏に食べられるスイーツ。<br>"
+    },
+    "冰糖银耳": {
+      "title": "冰糖銀耳",
+      "content": "冰糖銀耳（ビンタンインアル）は、白キクラゲ（銀耳）を氷砂糖で煮込んだ、中国の伝統的な薬膳スイーツです。<br><br>"
+    },
+    "串串香": {
+      "title": "串串香",
+      "content": "串串香（チュアンチュアンシャン）: 具材を串に刺し、麻辣（マーラー）スープで茹でる、串鍋のスタイル。好みの具材を自分で選べるのが魅力。<br><br>"
+    },
+    "钵钵鸡": {
+      "title": "鉢鉢鶏",
+      "content": "鉢鉢鶏（ボーボージー）: 茹でた具材を、花椒やラー油の効いた冷たいスープに浸した串料理。串串香よりもさっぱりとしていながら、コクがある。<br><br>"
+    },
+    "叶儿粑": {
+      "title": "葉児粑",
+      "content": "葉児粑（イェールバー）: 笹の葉で包んだお餅。もち米の粉の中に、肉やあんこが入っている。<br><br>"
+    },
+    "狼牙土豆": {
+      "title": "狼牙（ろうげ）ポテト",
+      "content": "狼牙（ろうげ）ポテト / 揚げジャガイモ：楽山（らくさん）の名物で、その場で揚げて売られるスタイル。外はカリッと、中はホクホク。ラー油、花椒、ドクダミ（折耳根）などで和えた、四川の街角で最も人気のあるおやつです。<br><br>"
+    },
+    "点心": {
+      "title": "点心",
+      "content": "お菓子（おかし）のほか、広東料理においては軽食・点心（ティムサム）全般を指します。<br><br>"
+    },
+    "流沙包": {
+      "title": "流沙包",
+      "content": "流沙包とは、中からとろっとしたカスタードや塩卵の黄身あんが流れ出る中華点心です。<br><br>"
+    },
+    "河粉": {
+      "title": "河粉",
+      "content": "河粉（ホーファン）とは、米粉から作られた幅広くて平たい麺で、主に中国南部（特に広東・香港）でよく食べられている伝統的な麺料理です。<br><br>"
+    },
+    "镬气": {
+      "title": "鍋気",
+      "content": "強火で中華鍋を使って調理したときに生まれる独特の香り・風味・旨みのことです。<br><br>"
+    }
+  };
+
+  // 4. 画面に表示する
+  let target = dictionary[wordId];
+  if (!target) {
+    const unquoted = wordId.replace(/[「」]/g, '').trim();
+    target = dictionary[unquoted];
+  }
+
+  if (target) {
+    document.getElementById('annotation-title').textContent = target.title;
+    document.getElementById('annotation-content').innerHTML = target.content;
+  } else if (wordId) {
+    document.getElementById('annotation-title').textContent = wordId;
+    document.getElementById('annotation-content').textContent = "このキーワードの注釈は見つかりませんでした。";
+  } else {
+    document.getElementById('annotation-title').textContent = "エラー";
+    document.getElementById('annotation-content').textContent = "このキーワードの注釈は見つかりませんでした。";
+  }
+
+  // 5. 语言切换时保持参数
+  if (wordId) {
+    document.querySelectorAll('.lang-switch a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href !== '#') {
+        a.setAttribute('href', href + '?id=' + encodeURIComponent(wordId));
+      }
+    });
+  }
+</script>
+</body>
+</html>

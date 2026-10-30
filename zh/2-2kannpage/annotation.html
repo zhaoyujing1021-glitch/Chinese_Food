@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>词条注释</title>
+  <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body style="background: #FAF6F0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+<div class="annotation-box" style="max-width: 600px; margin: 40px auto; padding: 25px; border: 1px solid #E8DFD5; border-radius: 8px; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid #F0EAE1; padding-bottom: 12px; gap: 10px; flex-wrap: wrap;">
+    <h2 id="annotation-title" style="margin: 0; color:#D9531E; font-size: 1.35rem;">正在加载...</h2>
+    
+    <div class="lang-nav">
+      <span class="lang-label">语言：</span>
+      <div class="lang-switch">
+        <a href="../../ja/2-2kannpage/annotation.html" class="">日本語</a>
+        <a href="#" class="active">中文</a>
+        <a href="../../en/2-2kannpage/annotation.html" class="">EN</a>
+        <a href="../../ru/2-2kannpage/annotation.html" class="">RU</a>
+      </div>
+    </div>
+  </div>
+  <div id="annotation-content" style="line-height: 1.8; margin: 18px 0; color: #443322; font-size: 1.02rem;"></div>
+  <button onclick="window.close();"
+    style="background: #D9531E; border: none; color: white; padding: 8px 24px; border-radius: 4px; cursor: pointer; font-size: 0.95rem; font-weight: bold; transition: background 0.2s;">
+    关闭
+  </button>
+</div>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const wordId = urlParams.get('id');
+  const dict = {"饼":{"title":"面饼（烤馕 / 面饼）","content":"在汉语与中亚语境中并非指软糯的打糕，而是指平底锅或馕坑中烤制的扁平面饼或烤馕。"},"馕":{"title":"烤馕","content":"新疆传统面食，将发酵面团贴在特制馕坑内壁烤制而成，香脆耐存，是日常主食。"},"烤包子":{"title":"烤包子（萨木萨）","content":"新疆传统美食，以面皮包裹调味羊肉丁与洋葱，贴在馕坑壁上烤至金黄焦脆，皮酥肉嫩多汁。"},"羊肉串":{"title":"羊肉串（卡瓦普）","content":"将新鲜羊肉切块穿签，撒上孜然、辣椒面与精盐，炭火慢烤而成，香气四溢，是新疆标志性小吃。"},"东北":{"title":"东北料理","content":"中国东北地区（黑龙江省、吉林省、辽宁省及内蒙古东部）的传统乡土菜肴，由黑龙江菜、吉林菜、辽宁菜三大体系构成，以分量实在、浓醇适口著称。"},"酸菜":{"title":"酸菜","content":"中国东北冬季用大白菜腌制发酵而成的传统特色蔬菜。常用于火锅、炖菜或水饺馅料，尤以酸菜炖五花肉、血肠最为著名。"},"锅包肉":{"title":"锅包肉","content":"以猪里脊为主料的东北经典传统名菜，起源于清末哈尔滨。外皮金黄酥脆，内里鲜嫩多汁，酸甜可口，色泽琥珀。"},"东北乱炖":{"title":"东北乱炖","content":"将排骨、土豆、豆角、茄子、玉米、白菜、粉条等食材同锅慢炖，以黄豆酱与酱油调味，荤素交融，家常醇香，下饭绝配。"},"地三鲜":{"title":"地三鲜","content":"选用土豆、茄子、青椒三味‘地里长出的鲜物’，过油炸制后以特制酱汁咸甜翻炒，软糯浓郁，是东北家常菜的代表。"},"东北大拉皮":{"title":"东北大拉皮","content":"以土豆淀粉等精制而成的宽条粉皮，口感滑爽、柔韧有嚼劲。配以黄瓜丝、麻酱、蒜汁凉拌，清爽开胃。"},"糖葫芦":{"title":"糖葫芦","content":"用竹签串起山楂等水果，裹上一层晶莹剔透的热熬冰糖糖衣。酸甜脆爽，是北方极具代表性的传统街头甜点。"},"拔丝":{"title":"拔丝","content":"将红薯、山药、苹果或香蕉等食材炸熟，裹上熬至拉丝的滚烫糖浆。夹起时糖丝绵绵，浸入凉水后外脆里糯。"},"溥仪":{"title":"溥仪","content":"爱新觉罗·溥仪，清朝第十二位皇帝，也是中国封建王朝的最后一位皇帝。东北料理融合了清代宫廷菜的精致技艺。"},"满州族":{"title":"满族","content":"发源于中国东北及长白山周边的古老民族，其独特的野味烹饪、白肉血肠及炖煮习俗对东北菜产生了奠基性影响。"},"满族":{"title":"满族","content":"发源于中国东北及长白山周边的古老民族，其独特的野味烹饪、白肉血肠及炖煮习俗对东北菜产生了奠基性影响。"},"香菜":{"title":"香菜（芫荽）","content":"在料理中常作为提香配料，具有独特的清新辛香气味，为菜肴增添风味。"},"13种面饼":{"title":"13种面饼","content":"早在11世纪编撰的《突厥语大词典》中，就已详实记载了十多种各具特色的烤馕与面饼制作技法，见证了丝路面食文化的悠久历史。"},"中式烹饪技法":{"title":"中式烹饪技法","content":"在维吾尔语中称为'Sai'的炒菜技法，源于汉语的'菜'。大火快炒的引入使拉条子（拌面）的浇头风味得到了极大丰富。"},"四川料理":{"title":"四川料理（川菜）","content":"中国四大菜系之一，以'一菜一格，百菜百味'著称。麻辣浓郁，百味交融，深受海内外食客喜爱。"},"麻婆豆腐":{"title":"麻婆豆腐","content":"川菜经典代表作。以牛肉末、红辣椒、花椒、郫县豆瓣酱炒香，豆腐入骨汤烧透勾芡，具有麻、辣、烫、嫩、酥、香等特色。"},"麻辣香锅":{"title":"麻辣香锅","content":"选用鲜虾、肉类、时蔬配以多种香料及花椒大火干炒而成的无汤锅品。鲜辣扑鼻，酱香浓郁。"},"火锅":{"title":"四川火锅","content":"以牛油、辣椒、花椒熬制浓郁麻辣红汤，席间围坐涮煮毛肚、肉片、蔬菜等食材的中国传统热饮美食。"},"棒棒鸡":{"title":"棒棒鸡","content":"四川传统凉菜。鲜嫩煮鸡肉用木棒捶松撕条，浇上以芝麻酱、红油、花椒特调的怪味酱汁，醇香鲜麻。"},"凉糕":{"title":"凉糕","content":"以大米磨浆熬凝而成的传统夏日甜品。冰镇后浇入浓稠红糖浆，清甜爽口，滑嫩解辣。"},"冰糖银耳":{"title":"冰糖银耳","content":"将白木耳与冰糖、枸杞慢炖出的传统甜羹。胶质浓郁，清润温和，是养颜润肺的传统滋补佳品。"},"串串香":{"title":"串串香","content":"将各种食材穿在竹签上，放入滚沸的麻辣红油锅中涮煮，食客自选，风味浓郁自由。"},"钵钵鸡":{"title":"钵钵鸡","content":"将煮熟穿串的食材浸泡在调好的冷油红汤或藤椒清汤中，麻辣鲜爽，清冽开胃。"},"叶儿粑":{"title":"叶儿粑","content":"以糯米粉裹肉馅或甜馅，以良姜叶包裹蒸熟的传统川味小吃。清香扑鼻，软糯不粘牙。"},"狼牙土豆":{"title":"狼牙土豆","content":"因切成波浪狼牙状而得名的街头炸土豆。现炸现拌，加入红油、花椒粉、折耳根碎，外脆内沙，香辣过瘾。"},"点心":{"title":"广式点心","content":"广式早茶中搭配香茶享用的各式精美小吃与蒸点，制作精巧，品类繁多。"},"流沙包":{"title":"流沙包","content":"粤式点心代表之一。包子蒸熟后，掰开有金黄温热的咸蛋黄奶黄馅缓缓流出，甜咸浓香。"},"河粉":{"title":"河粉（沙河粉）","content":"源自广州沙河镇的宽平米粉，米香醇厚，口感爽滑有韧性，是干炒牛河的绝对主角。"},"镬气":{"title":"镬气（锅气）","content":"大火烹调下，食材与铁锅在高温翻炒中产生的特有焦香与香气升华，是顶级炒菜的灵魂标志。"}};
+
+  if (wordId && dict[wordId]) {
+    document.getElementById('annotation-title').textContent = dict[wordId].title;
+    document.getElementById('annotation-content').innerHTML = dict[wordId].content;
+  } else if (wordId) {
+    document.getElementById('annotation-title').textContent = wordId;
+    document.getElementById('annotation-content').textContent = "未找到该关键词的释义。";
+  } else {
+    document.getElementById('annotation-title').textContent = "未找到该关键词的释义。";
+  }
+
+  if (wordId) {
+    document.querySelectorAll('.lang-switch a').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && href !== '#') {
+        a.setAttribute('href', href + '?id=' + encodeURIComponent(wordId));
+      }
+    });
+  }
+</script>
+</body>
+</html>
