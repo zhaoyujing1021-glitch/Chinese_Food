@@ -1,7 +1,0 @@
-请帮我修改 ja 文件夹下的所有 2-x 系列页面（如 2-1vpage、2-2kannpage、2-3shipage、2-4doupage 等）。
-具体修改要求如下：
-修改范围：仅限 ja 文件夹下的 2-x 各个页面。图片来源：读取每个页面对应的 images/loop 文件夹中的所有图片（例如 2-3shipage/images/loop/ 下的 bangbangji.jpg, bingtang.jpg, hinabe.jpg 等）。   
-尺寸统一：由于图片大小不一致，必须为轮播图中的所有图片设置统一的固定尺寸和样式（例如使用 object-fit: cover 统一填充），防止轮播时出现抖动或变形。
-轮播效果：将这些图片制作成一个轮播图（Slider / Carousel）组件，实现从左到右循环轮播。
-位置摆放：将这个轮播图放置在页面中 <h2>代表的な料理</h2> 标签的正上方。
-代码规范：相关的 CSS 样式可以写在 <style> 中，轮播控制的 JavaScript 代码直接写在 HTML 文件底部 即可，方便维护。
