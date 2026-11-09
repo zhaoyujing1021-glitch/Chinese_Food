@@ -7,6 +7,60 @@
 <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" type="image/png" href="images/logo.png">
+<style>
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: 300px;
+    margin: 25px auto 20px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: transparent;
+    user-select: none;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 20px; /* 三张图之间的间距 */
+    height: 100%;
+    align-items: center;
+    will-change: transform;
+  }
+
+  .carousel-slide {
+    /* 核心修改：计算宽度，让容器里正好完整并排显示 3 张图 (100% - 2个间距) / 3 */
+    flex: 0 0 calc((100% - 40px) / 3); 
+    height: 260px;   /* 统一的高度 */
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+
+  .carousel-slide img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    object-fit: cover !important; /* 统一剪裁填充，保持图片美观不变形 */
+    object-position: center !important;
+  }
+
+  /* 响应式调整：手机端可以改为显示 1 张或 1.5 张 */
+  @media (max-width: 768px) {
+    .carousel-container {
+      height: 220px;
+    }
+    .carousel-slide {
+      flex: 0 0 calc((100% - 15px) / 1.5); /* 手机端露出约 1.5 张 */
+    }
+  }
+</style>
 </head>
 <body> 
 <div id="sichuan" class="big-bg">
@@ -41,8 +95,21 @@
 <article>
 <h1 class="title">天府川菜的世界</h1>
 <p>川菜作为中国四大菜系之一，素有“一菜一格，百菜百味”的盛誉。四川盆地特有的湿热气候孕育出了以“麻辣”（辣椒的香辣与花椒的麻爽）见长的风味体系，深受国内外食客的热爱。</p>
-<img class="img" src="images/mapo.webp" alt="天府川菜的世界">
 
+<!-- 代表的な料理の輪播図 (Carousel) -->
+<div class="carousel-container">
+  <div class="carousel-track">
+    <div class="carousel-slide"><img src="images/loop/mapo.webp" alt="麻婆豆腐"></div>
+    <div class="carousel-slide"><img src="images/loop/marakoko.jpg" alt="麻辣香鍋"></div>
+    <div class="carousel-slide"><img src="images/loop/hinabe.jpg" alt="火鍋"></div>
+    <div class="carousel-slide"><img src="images/loop/bangbangji.jpg" alt="棒棒鶏"></div>
+    <div class="carousel-slide"><img src="images/loop/bingtang.jpg" alt="氷砂糖"></div>
+    <div class="carousel-slide"><img src="images/loop/lianggao.jpg" alt="涼糕"></div>
+  </div>
+  <button class="carousel-btn carousel-prev" aria-label="前へ">&#10094;</button>
+  <button class="carousel-btn carousel-next" aria-label="次へ">&#10095;</button>
+  <div class="carousel-indicators"></div>
+</div>
 <h2>代表性经典美食</h2>
 
 <div class="dish-item">
@@ -128,6 +195,77 @@
       window.open(`annotation.html?id=${encodeURIComponent(wordText)}`, '_blank');
     });
   });
+</script>
+<script>
+  (function() {
+    const carousel = document.querySelector('.carousel-container');
+    if (!carousel) return;
+
+    const track = carousel.querySelector('.carousel-track');
+    const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
+    const totalSlides = originalSlides.length;
+    if (totalSlides <= 3) return; // 如果图片本身小于等于3张，可以不滚动
+
+    // 为了实现无缝循环，复制多份图片接在后面
+    originalSlides.forEach(slide => {
+      track.appendChild(slide.cloneNode(true));
+    });
+
+    let currentIndex = 0;
+    let autoPlayTimer = null;
+
+    function getStepWidth() {
+      const slide = track.querySelector('.carousel-slide');
+      if (!slide) return 0;
+      const style = window.getComputedStyle(track);
+      const gap = parseFloat(style.gap) || 20;
+      return slide.getBoundingClientRect().width + gap;
+    }
+
+    function updateSlidePosition(smooth = true) {
+      if (smooth) {
+        track.style.transition = 'transform 0.5s ease-in-out';
+      } else {
+        track.style.transition = 'none';
+      }
+      const step = getStepWidth();
+      track.style.transform = `translateX(${-currentIndex * step}px)`;
+    }
+
+    function nextSlide() {
+      currentIndex++;
+      updateSlidePosition(true);
+
+      // 滚动到末尾时无缝重置回起点
+      setTimeout(() => {
+        if (currentIndex >= totalSlides) {
+          currentIndex = 0;
+          updateSlidePosition(false);
+        }
+      }, 500);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(nextSlide, 2000); // 每 3 秒滚动一张
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    window.addEventListener('load', () => updateSlidePosition(false));
+    window.addEventListener('resize', () => updateSlidePosition(false));
+    updateSlidePosition(false);
+
+    startAutoPlay();
+  })();
 </script>
 </body>
 </html>
